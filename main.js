@@ -76,7 +76,7 @@ window.addEventListener("load", () => {
           }
 
 
-          locationName.innerText=`${city}, ${state}, ${country}`;
+          locationName.innerText=`${city} ${state}, ${country}`;
 
         })
     });
