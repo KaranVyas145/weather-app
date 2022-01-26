@@ -6,6 +6,9 @@ window.addEventListener("load", () => {
   let weatherIcon =document.querySelector("#icon");
   let temperatureDegree = document.querySelector(".temperature-degree");
   let locationTimezone = document.querySelector(".location-timezone");
+  let degreeSection=document.querySelector(".temperature");
+  let temperatureUnit=document.querySelector('span');
+  console.log(temperatureUnit);
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       console.log(position);
@@ -23,14 +26,34 @@ window.addEventListener("load", () => {
           console.log(timezone);
           const { temp } = data.current;
           console.log(temp);
-          const { description,icon } = data.current.weather[0];
+          const { description,icon } = 
+          data.current.weather[0];
           console.log(description);
+          
+
+          let temperature=(temp - 272.15).toFixed(2);
+          // Formula for Celsius 
+          let farhenheit= (temperature*(9/5))+32;
 
           //   set DOM elements from the API
-          temperatureDegree.innerText = (temp - 272.15).toFixed(2);
+          temperatureDegree.innerText = temperature;
           temperatureDescription.innerText = description.toUpperCase();
           locationTimezone.innerText = timezone;
-          weatherIcon.setAttribute('src',`http://openweathermap.org/img/w/${icon}.png`)
+          weatherIcon.setAttribute('src',`http://openweathermap.org/img/w/${icon}.png`);
+
+          // Change tempeature to C/F 
+          degreeSection.addEventListener('click',()=>{
+            // console.log(temperatureUnit.innerText);
+            if(temperatureUnit.innerText==='C'){
+              temperatureUnit.innerText='F';
+              temperatureDegree.innerText=farhenheit.toFixed(2);
+            }
+            else{
+              temperatureDegree.innerText=temperature;
+              temperatureUnit.innerText='C';
+            }
+          })
+
         });
     });
   }
