@@ -71,8 +71,8 @@ window.addEventListener("load", () => {
           let country = locdata.address.country;
 
           console.log(city);
-          if(city==='undefined'){
-            city=''
+          if(city===undefined){
+            city='';
           }
 
 
