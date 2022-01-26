@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
   let temperatureDescription = document.querySelector(".temperature-description");
   let weatherIcon =document.querySelector("#icon");
   let temperatureDegree = document.querySelector(".temperature-degree");
-  let locationTimezone = document.querySelector(".location-timezone");
+  let locationName = document.querySelector(".location-name");
   let degreeSection=document.querySelector(".temperature");
   let temperatureUnit=document.querySelector('span');
   console.log(temperatureUnit);
@@ -14,8 +14,10 @@ window.addEventListener("load", () => {
       console.log(position);
       long = position.coords.longitude;
       lat = position.coords.latitude;
+
+
+      // Fetching the API to get the weather from the given coordinates 
       const api = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&appid=${key}`;
-      // console.log(api);
       fetch(api)
         .then((Response) => {
           return Response.json();
@@ -38,7 +40,7 @@ window.addEventListener("load", () => {
           //   set DOM elements from the API
           temperatureDegree.innerText = temperature;
           temperatureDescription.innerText = description.toUpperCase();
-          locationTimezone.innerText = timezone;
+          // locationTimezone.innerText = timezone;
           weatherIcon.setAttribute('src',`http://openweathermap.org/img/w/${icon}.png`);
 
           // Change tempeature to C/F 
@@ -55,6 +57,19 @@ window.addEventListener("load", () => {
           })
 
         });
+
+        const apiLocation = `https://us1.locationiq.com/v1/reverse.php?key=pk.d4fcc3e2d161a2fd46ebaa2f5126a390&lat=${lat}&lon=${long}&format=json`;
+        // console.log(apiLocation);
+        fetch(apiLocation).then((Response)=>{
+          return Response.json();
+        })
+        .then((locdata)=>{
+          console.log(locdata);
+          console.log(locdata.address.city,locdata.address.state, locdata.address.country);
+
+          locationName.innerText=`${locdata.address.city}, ${locdata.address.state}, ${locdata.address.country}`;
+
+        })
     });
   }
 });

@@ -23,6 +23,11 @@ body{
     align-items: center;
 }
 
+.location-name{
+    font-size: 25px;
+    margin-right: 10px;
+}
+
 .temperature{
     flex-direction: column;
 }
