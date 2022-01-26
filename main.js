@@ -2,11 +2,10 @@ window.addEventListener("load", () => {
   let long;
   let lat;
   let key = `67521aab479b5104a4a9037f587854c6`;
-  let temperatureDescription = document.querySelector(
-    ".temperature-description"
-  );
+  let temperatureDescription = document.querySelector(".temperature-description");
+  let weatherIcon =document.querySelector("#icon");
   let temperatureDegree = document.querySelector(".temperature-degree");
-  let locationTimezone=document.querySelector(".location-timezone");
+  let locationTimezone = document.querySelector(".location-timezone");
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       console.log(position);
@@ -20,14 +19,18 @@ window.addEventListener("load", () => {
         })
         .then((data) => {
           console.log(data.current);
-          const {timezone}= data;
+          const { timezone } = data;
           console.log(timezone);
           const { temp } = data.current;
           console.log(temp);
-          const {description}=data.current.weather[0];
+          const { description,icon } = data.current.weather[0];
           console.log(description);
 
-        //   set DOM elements from the API 
+          //   set DOM elements from the API
+          temperatureDegree.innerText = (temp - 272.15).toFixed(2);
+          temperatureDescription.innerText = description.toUpperCase();
+          locationTimezone.innerText = timezone;
+          weatherIcon.setAttribute('src',`http://openweathermap.org/img/w/${icon}.png`)
         });
     });
   }
