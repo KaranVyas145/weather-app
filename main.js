@@ -70,9 +70,12 @@ window.addEventListener("load", () => {
           let state= locdata.address.state;
           let country = locdata.address.country;
 
-          if(city='undefined'){
-            city='';
+          console.log(city);
+          if(city==='undefined'){
+            city=''
           }
+
+
           locationName.innerText=`${city}, ${state}, ${country}`;
 
         })
