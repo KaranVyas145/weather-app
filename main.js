@@ -66,8 +66,14 @@ window.addEventListener("load", () => {
         .then((locdata)=>{
           console.log(locdata);
           console.log(locdata.address.city,locdata.address.state, locdata.address.country);
+          let city= locdata.address.city;
+          let state= locdata.address.state;
+          let country = locdata.address.country;
 
-          locationName.innerText=`${locdata.address.city}, ${locdata.address.state}, ${locdata.address.country}`;
+          if(city='undefined'){
+            city='';
+          }
+          locationName.innerText=`${city}, ${state}, ${country}`;
 
         })
     });
