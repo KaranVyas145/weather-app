@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
   let long;
   let lat;
-  let key = `67521aab479b5104a4a9037f587854c6`;
+  let key = token.tokenKey;
   let temperatureDescription = document.querySelector(".temperature-description");
   let weatherIcon =document.querySelector("#icon");
   let temperatureDegree = document.querySelector(".temperature-degree");
